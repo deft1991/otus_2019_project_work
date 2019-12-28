@@ -8,5 +8,10 @@
     <artifactId>otus_2019_project_work</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <modules>
+        <module>auth-service</module>
+        <module>backend-service</module>
+        <module>telegrambot-service</module>
+    </modules>
 
 </project>

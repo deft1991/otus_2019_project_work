@@ -1,0 +1,37 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /auth
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:securityBd
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+    initialization-mode: always
+    platform: h2
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  h2:
+    console:
+      enabled: true
+
+
+
+user:
+  oauth:
+    clientId: auth-service
+    clientSecret: my-secret-key
+    redirectUris: http://localhost:8082/login/oauth2/code/
+#    user:
+#      username: Andrew
+#      password: abcd
