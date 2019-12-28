@@ -1,0 +1,46 @@
+# Folders
+build
+events
+.gradle
+.idea
+node_modules
+classes
+target
+logs
+jspm_packages
+tmp
+**/target/
+
+# File Patterns
+*.class
+*.iml
+*.ipr
+*.iws
+*.map
+*.sublime-project
+.classpath
+.settings
+.project
+.codekit-chache
+.sass-chache
+/webapp/npm-debug.log.*
+/mqjms.log.*
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Thrashes
+ehthumbs.db
+Thumbs.db
