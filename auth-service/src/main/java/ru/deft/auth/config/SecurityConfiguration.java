@@ -55,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/h2-console/**")
                 .antMatchers(HttpMethod.POST, "/user/create")
-                .antMatchers("/user/**");
+                .antMatchers("/user");
     }
 
     @Override
