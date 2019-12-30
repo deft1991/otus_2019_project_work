@@ -9,11 +9,12 @@ import ru.deft.auth.model.UserEntity;
  */
 @Getter
 @Setter
-public class UserEntityDto {
+public class UserSaveDto {
+    Integer telegramId;
     private String username;
     private String password;
 
     public UserEntity toEntity() {
-        return new UserEntity(username, password);
+        return new UserEntity(telegramId, username, password);
     }
 }

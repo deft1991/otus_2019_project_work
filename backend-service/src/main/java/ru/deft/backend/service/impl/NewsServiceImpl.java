@@ -20,7 +20,6 @@ public class NewsServiceImpl implements NewsService {
 
     private final NewsRepository newsRepository;
 
-
     @Override
     public UUID createNews(NewsDto dto, Principal principal) {
         News entity = dto.toEntity();

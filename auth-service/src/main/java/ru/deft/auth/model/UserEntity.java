@@ -29,8 +29,12 @@ public class UserEntity {
     @GenericGenerator(name = "kaugen", strategy = "increment")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "TELEGRAM_USER_ID")
+    Integer telegramId;
     @Column(name = "USERNAME")
     private String username;
+    @Column(name = "NICK_NAME")
+    private String nickName;
     @Column(name = "PASSWORD")
     private String password;
 
@@ -41,5 +45,17 @@ public class UserEntity {
         this.username = username;
         this.password = password;
 
+    }
+
+    public UserEntity(String username, Integer telegramId, String password) {
+        this.username = username;
+        this.telegramId = telegramId;
+        this.password = password;
+    }
+
+    public UserEntity(Integer telegramId, String username, String password) {
+        this.telegramId = telegramId;
+        this.username = username;
+        this.password = password;
     }
 }

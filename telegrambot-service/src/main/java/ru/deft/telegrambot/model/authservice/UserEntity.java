@@ -13,11 +13,19 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserEntity {
     Long id;
+    Integer telegramId;
     private String username;
     private String password;
+    private String nickName;
 
-    public UserEntity(String username, String password) {
+    public UserEntity(String username, Integer telegramId, String password) {
         this.username = username;
+        this.telegramId = telegramId;
         this.password = password;
+    }
+
+    public UserEntity(Integer telegramId, String displayedName) {
+        this.telegramId = telegramId;
+        this.nickName = displayedName;
     }
 }

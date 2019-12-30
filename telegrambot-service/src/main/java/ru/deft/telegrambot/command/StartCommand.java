@@ -8,9 +8,12 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
+import ru.deft.telegrambot.feign.client.AuthFeignClient;
+import ru.deft.telegrambot.model.authservice.UserEntity;
 import ru.deft.telegrambot.model.telegramservice.Anonymous;
 import ru.deft.telegrambot.service.AnonymousService;
 
+import java.util.Base64;
 import java.util.List;
 
 /*
@@ -23,17 +26,20 @@ public class StartCommand extends AnonymizerCommand {
     public static final String LOG_COMMAND_WITH_USER_ID_AND_COMMAND_IDENTIFIER = "Start execute command: %s, userId: %s, commandIdentifier: %s";
 
 
-    private final AnonymousService mAnonymouses;
     private final List<Chat> chats;
+    private final AnonymousService mAnonymouses;
+    private final AuthFeignClient authFeignClient;
 
     // обязательно нужно вызвать конструктор суперкласса,
     // передав в него имя и описание команды
     @Autowired
     public StartCommand(@Qualifier("AnonymousService") AnonymousService anonymouses
-            , @Qualifier("chats") List<Chat> chats) {
+            , @Qualifier("chats") List<Chat> chats
+            , AuthFeignClient authFeignClient) {
         super("start", "start using bot\n");
         this.mAnonymouses = anonymouses;
         this.chats = chats;
+        this.authFeignClient = authFeignClient;
     }
 
     /**
@@ -58,6 +64,7 @@ public class StartCommand extends AnonymizerCommand {
             log.info(String.format("User id = %s is trying to execute '%s' the first time. Added to users' list.", user.getId(), getCommandIdentifier()));
             sb.append("Hi, ").append(user.getUserName()).append("! You've been added to bot users' list!\n")
                     .append("Please execute command:\n'/set_name <displayed_name>'\nwhere &lt;displayed_name&gt; is the name you want to use to hide your real name.");
+            saveNewUser(user);
         } else {
             log.info(String.format("User id = %s has already executed '%s'. Is he trying to do it one more time?", user.getId(), getCommandIdentifier()));
             sb.append("You've already started bot! You can send messages if you set your name (/set_name).");
@@ -66,5 +73,16 @@ public class StartCommand extends AnonymizerCommand {
         chats.add(chat);
         message.setText(sb.toString());
         execute(absSender, message, user);
+    }
+
+    private void saveNewUser(User user) {
+        try {
+
+            log.info(String.format("Try to save new user via feign client: user id = %s, name = %s", user.getId(), user.getFirstName()));
+            UserEntity userEntity = new UserEntity(user.getFirstName(), user.getId(), Base64.getEncoder().encodeToString("password".getBytes()));
+            authFeignClient.createUser(userEntity);
+        } catch (Exception e) {
+            log.error("Error while saving user by feign client: ");
+        }
     }
 }

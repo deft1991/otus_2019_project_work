@@ -7,10 +7,12 @@ package ru.deft.auth.controller;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.deft.auth.dto.UserEntityDto;
+import ru.deft.auth.dto.UserSaveDto;
+import ru.deft.auth.dto.UserUpdateDto;
 import ru.deft.auth.service.UserService;
 
 import java.security.Principal;
@@ -30,7 +32,12 @@ public class UserController {
 
 
     @PostMapping("/create")
-    public Long user(@RequestBody UserEntityDto userEntityDto) {
-        return userService.createUser(userEntityDto);
+    public Long create(@RequestBody UserSaveDto userSaveDto) {
+        return userService.createUser(userSaveDto);
+    }
+
+    @PutMapping
+    public Long update(@RequestBody UserUpdateDto userUpdateDto) {
+        return userService.updateUser(userUpdateDto);
     }
 }

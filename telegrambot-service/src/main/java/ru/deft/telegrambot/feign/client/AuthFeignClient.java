@@ -16,4 +16,8 @@ public interface AuthFeignClient {
     @RequestMapping(method = RequestMethod.POST, value = "/user/create")
     @Headers("Content-Type: application/json")
     Long createUser(UserEntity userEntity);
+
+    @RequestMapping(method = RequestMethod.PUT, value = "/user")
+    @Headers("Content-Type: application/json")
+    void updateUser(UserEntity userEntity);
 }

@@ -66,9 +66,9 @@ public class SetNameCommand extends AnonymizerCommand {
                 sb.append("Your displayed name: '").append(displayedName)
                         .append("'. Now you can send messages to bot!");
             } else {
-                log.info(String.format("Try to save new user via feign client: user id = %s, name = %s", user.getId(), displayedName));
-                UserEntity userEntity = new UserEntity(displayedName, Base64.getEncoder().encodeToString("password".getBytes()));
-                authFeignClient.createUser(userEntity);
+                log.info(String.format("Try to update user (set nickname) via feign client: user id = %s, name = %s", user.getId(), displayedName));
+                UserEntity userEntity = new UserEntity(user.getId(), displayedName);
+                authFeignClient.updateUser(userEntity);
                 log.info(String.format("User id = %s has changed name to '%s'", user.getId(), displayedName));
                 sb.append("Your new displayed name: '").append(displayedName).append("'.");
             }
