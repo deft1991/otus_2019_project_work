@@ -19,6 +19,6 @@ public interface NewsRepository extends CrudRepository<News, UUID> {
      *
      * @return earliest not published News
      */
-    @Query(value = "select n.* from News n where n.IS_PUBLISHED = false order by n.CREATED_DATE asc limit 1", nativeQuery = true)
+    @Query(value = "select n.* from News n where n.IS_APPROVED = true and n.IS_PUBLISHED = false order by n.CREATED_DATE asc limit 1", nativeQuery = true)
     News geNewsForPublish();
 }

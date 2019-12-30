@@ -7,6 +7,7 @@ create table NEWS
     NEWS_TEXT          varchar(2000)         not null,
     LIKE_COUNT         int                   null,
     DISLIKE            int                   null,
+    IS_APPROVED        boolean default false not null,
     IS_PUBLISHED       boolean default false not null,
     CREATED_DATE       datetime              not null,
     CREATED_BY         varchar(255)          not null,

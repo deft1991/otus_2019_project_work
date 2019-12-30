@@ -26,6 +26,8 @@ public class News extends BaseEntity {
     private Integer likeCount;
     @Column(name = "DISLIKE")
     private Integer disLike;
+    @Column(name = "IS_APPROVED")
+    private boolean isApproved;
     @Column(name = "IS_PUBLISHED")
     private boolean isPublished;
 
