@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>News List</title>
     <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
 </head>
@@ -17,12 +17,30 @@
             <th>News Text</th>
             <th>Like</th>
             <th>Dislike</th>
+            <th>Approved</th>
+            <th>Published</th>
         </tr>
         <tr th:each="news : ${newsList}">
             <td th:utext="${news.userName}">...</td>
             <td th:utext="${news.newsText}">...</td>
             <td th:utext="${news.likeCount}">...</td>
             <td th:utext="${news.disLike}">...</td>
+            <td>
+                <input
+                        type="checkbox"
+                        name="approved"
+                        th:checked="${news.approved}"
+                        disabled="disabled"
+                        checked="checked"/>
+            </td>
+            <td>
+                <input
+                        type="checkbox"
+                        name="published"
+                        th:checked="${news.published}"
+                        disabled="disabled"
+                        checked="checked"/>
+            </td>
         </tr>
     </table>
 </div>
