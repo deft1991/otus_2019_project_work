@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.Column;
@@ -11,10 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.UUID;
 
 /*
  * Created by sgolitsyn on 12/11/19
@@ -22,13 +25,13 @@ import java.util.Collection;
 @Getter
 @Setter
 @Entity
-@Table(name = "USERS")
+@Table(name = "users")
 @NoArgsConstructor
 public class UserEntity {
     @Id
-    @GenericGenerator(name = "kaugen", strategy = "increment")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
+    private UUID id;
     @Column(name = "TELEGRAM_USER_ID")
     Integer telegramId;
     @Column(name = "USERNAME")

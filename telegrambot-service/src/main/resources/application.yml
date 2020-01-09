@@ -17,7 +17,9 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
-
+        jdbc:
+          lob:
+            non_contextual_creation: true
   h2:
     console:
       enabled: true

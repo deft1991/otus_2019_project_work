@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 /*
  * Created by sgolitsyn on 12/11/19
  */
@@ -12,8 +14,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class UserEntity {
-    Long id;
-    Integer telegramId;
+    private UUID id;
+    private Integer telegramId;
     private String username;
     private String password;
     private String nickName;

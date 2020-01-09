@@ -16,6 +16,7 @@ import ru.deft.auth.dto.UserUpdateDto;
 import ru.deft.auth.service.UserService;
 
 import java.security.Principal;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -32,12 +33,12 @@ public class UserController {
 
 
     @PostMapping("/create")
-    public Long create(@RequestBody UserSaveDto userSaveDto) {
+    public UUID create(@RequestBody UserSaveDto userSaveDto) {
         return userService.createUser(userSaveDto);
     }
 
     @PutMapping
-    public Long update(@RequestBody UserUpdateDto userUpdateDto) {
+    public UUID update(@RequestBody UserUpdateDto userUpdateDto) {
         return userService.updateUser(userUpdateDto);
     }
 }

@@ -17,6 +17,8 @@ security:
     resource:
       userInfoUri: http://localhost:8081/auth/user/me
 spring:
+  profiles:
+    active: dev
   thymeleaf:
     cache: false
   datasource:
@@ -33,6 +35,9 @@ spring:
         show_sql: true
         use_sql_comments: true
         format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
 
   h2:
     console:

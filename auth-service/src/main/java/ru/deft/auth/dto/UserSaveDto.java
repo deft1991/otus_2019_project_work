@@ -15,6 +15,7 @@ public class UserSaveDto {
     private String password;
 
     public UserEntity toEntity() {
-        return new UserEntity(telegramId, username, password);
+//        return new UserEntity(telegramId, username, password);
+        return new UserEntity();
     }
 }

@@ -9,6 +9,8 @@ security:
       filter-order: 3
 
 spring:
+  profiles:
+    active: dev
   datasource:
     url: jdbc:h2:mem:securityBd
     driverClassName: org.h2.Driver
@@ -17,8 +19,18 @@ spring:
     initialization-mode: always
     platform: h2
   jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
     hibernate:
-      ddl-auto: create-drop
+      ## This is important
+      # Hibernate ddl auto (create, create-drop, validate, update)
+      ddl-auto: validate
     database-platform: org.hibernate.dialect.H2Dialect
 
   h2:

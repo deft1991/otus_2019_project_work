@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.Column;
@@ -34,10 +34,13 @@ public class BaseEntity {
 //                    value = "org.hibernate.id.uuid.CustomVersionOneStrategy")}
 //    )
 //    @Column(name = "id", updatable = false, nullable = false)
-    @GeneratedValue(generator = "uuid2")
-    @GenericGenerator(name = "uuid2", strategy = "uuid2")
-    @Column(columnDefinition = "CHAR(32)")
+//    @GeneratedValue(generator = "uuid2")
+//    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+//    @Column(columnDefinition = "CHAR(32)")
+//    @Id
     @Id
+    @GeneratedValue
+    @Type(type = "org.hibernate.type.PostgresUUIDType")
     private UUID id;
 
     @CreationTimestamp
@@ -56,7 +59,7 @@ public class BaseEntity {
 
 
     public void setCreatedBy(String createdBy) {
-        if (createdBy == null || createdBy.equals("")){
+        if (createdBy == null || createdBy.equals("")) {
             createdBy = "base user";
         } else {
             this.createdBy = createdBy;

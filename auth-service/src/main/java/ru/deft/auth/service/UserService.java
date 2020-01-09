@@ -3,12 +3,14 @@ package ru.deft.auth.service;
 import ru.deft.auth.dto.UserSaveDto;
 import ru.deft.auth.dto.UserUpdateDto;
 
+import java.util.UUID;
+
 /*
  * Created by sgolitsyn on 12/23/19
  */
 public interface UserService {
 
-    Long createUser(UserSaveDto userSaveDto);
+    UUID createUser(UserSaveDto userSaveDto);
 
-    Long updateUser(UserUpdateDto userUpdateDto);
+    UUID updateUser(UserUpdateDto userUpdateDto);
 }

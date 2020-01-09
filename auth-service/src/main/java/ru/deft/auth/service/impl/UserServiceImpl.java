@@ -15,6 +15,8 @@ import ru.deft.auth.model.UserEntity;
 import ru.deft.auth.repository.UserRepository;
 import ru.deft.auth.service.UserService;
 
+import java.util.UUID;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public Long createUser(UserSaveDto userSaveDto) {
+    public UUID createUser(UserSaveDto userSaveDto) {
         String encodePass = passwordEncoder.encode(userSaveDto.getPassword());
         UserEntity save = userRepository.save(new UserEntity(userSaveDto.getUsername(), userSaveDto.getTelegramId(), encodePass));
         return save.getId();
@@ -32,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Long updateUser(UserUpdateDto userUpdateDto) {
+    public UUID updateUser(UserUpdateDto userUpdateDto) {
         UserEntity byTelegramId = userRepository.findByTelegramId(userUpdateDto.getTelegramId());
         byTelegramId.setNickName(userUpdateDto.getNickName());
         return byTelegramId.getId();
