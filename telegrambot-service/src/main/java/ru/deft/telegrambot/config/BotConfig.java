@@ -27,9 +27,15 @@ public class BotConfig {
     private String botName;
     private String botToken;
     private List<Chat> chats;
+    private Proxy proxy;
 
-    private static final String PROXY_HOST = "185.234.217.6";
-    private static final int PROXY_PORT = 3128;
+    @Getter
+    @Setter
+    public static class Proxy {
+        private String host;
+        private Integer port;
+    }
+
     private static final DefaultBotOptions.ProxyType PROXY_TYPE = DefaultBotOptions.ProxyType.HTTP;
 
     @Bean("botOptions")
@@ -37,8 +43,8 @@ public class BotConfig {
 
         DefaultBotOptions botOptions = ApiContext.getInstance(DefaultBotOptions.class);
 
-        botOptions.setProxyHost(PROXY_HOST);
-        botOptions.setProxyPort(PROXY_PORT);
+        botOptions.setProxyHost(proxy.getHost());
+        botOptions.setProxyPort(proxy.getPort());
         botOptions.setProxyType(PROXY_TYPE);
         return botOptions;
     }

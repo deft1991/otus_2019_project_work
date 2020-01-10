@@ -23,3 +23,14 @@ spring:
   h2:
     console:
       enabled: true
+telegram:
+  proxy:
+    host: 185.234.217.6
+    port: 3128
+feign:
+  client:
+    config:
+      auth:
+        url: http://localhost:8081/auth
+      news:
+        url: http://localhost:8082/ui

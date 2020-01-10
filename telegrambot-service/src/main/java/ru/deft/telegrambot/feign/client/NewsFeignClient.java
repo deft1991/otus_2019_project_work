@@ -10,7 +10,7 @@ import ru.deft.telegrambot.model.backendservice.News;
 /*
  * Created by sgolitsyn on 12/24/19
  */
-@FeignClient(value = "news", url = "http://localhost:8082/ui", configuration = FeignClientConfig.class)
+@FeignClient(value = "news", url = "${feign.client.config.news.url}", configuration = FeignClientConfig.class)
 public interface NewsFeignClient {
 
     @RequestMapping(method = RequestMethod.PUT, value = "/news/publish")
