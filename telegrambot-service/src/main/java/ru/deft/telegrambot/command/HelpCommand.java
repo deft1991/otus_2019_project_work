@@ -1,6 +1,7 @@
 package ru.deft.telegrambot.command;
 
 import lombok.extern.slf4j.Slf4j;
+import org.telegram.telegrambots.extensions.bots.commandbot.commands.IBotCommand;
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.ICommandRegistry;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
@@ -28,7 +29,9 @@ public class HelpCommand extends AnonymizerCommand {
 
         StringBuilder helpMessageBuilder = new StringBuilder("<b>Available commands:</b>");
 
-        mCommandRegistry.getRegisteredCommands().forEach(cmd -> helpMessageBuilder.append(cmd.toString()).append("\n"));
+        for (IBotCommand registeredCommand : mCommandRegistry.getRegisteredCommands()) {
+            helpMessageBuilder.append(registeredCommand.toString()).append("\n");
+        }
 
         SendMessage helpMessage = new SendMessage();
         helpMessage.setChatId(chat.getId().toString());
