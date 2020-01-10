@@ -41,11 +41,10 @@ public class NewsletterService {
             News news = newsFeignClient.geNewsForPublish();
             if (news != null) {
 
-                StringBuilder textMessage = new StringBuilder();
-                textMessage.append(String.format("News from %s. \n", news.getUserName()));
-                textMessage.append(String.format("%s. \n", news.getNewsText()));
                 SendMessage message = new SendMessage();
-                message.setText(textMessage.toString());
+                String textMessage = String.format("News from %s. \n", news.getUserName()) +
+                        String.format("%s. \n", news.getNewsText());
+                message.setText(textMessage);
                 chats.forEach(chat -> {
                     try {
                         message.setChatId(chat.getId());
