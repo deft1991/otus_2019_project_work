@@ -51,6 +51,7 @@ public class NewsletterService {
                         message.setChatId(chat.getId());
                         anonymizerBot.execute(message);
                     } catch (TelegramApiException e) {
+                        log.error(String.format("Error while NewsletterService.newsletter: %s", e.getLocalizedMessage()));
                         e.printStackTrace();
                     }
                 });
