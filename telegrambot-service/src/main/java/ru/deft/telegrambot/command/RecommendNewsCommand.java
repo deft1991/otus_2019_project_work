@@ -55,6 +55,12 @@ public class RecommendNewsCommand extends AnonymizerCommand {
         }
 
         String newsText = GetTextFromTelegramMessage.getText(arguments);
+        if (newsText == null || newsText.isEmpty()){
+            log.info(String.format("User id = %s recommend empty news", user.getId()));
+            message.setText("You should recommend non-empty news!");
+            execute(absSender, message, user);
+            return;
+        }
         newsFeignClient.recommendNews(new RecommendDto(newsText, user.getFirstName()));
 
         message.setText("You`ve recommended news! Congratulations!");

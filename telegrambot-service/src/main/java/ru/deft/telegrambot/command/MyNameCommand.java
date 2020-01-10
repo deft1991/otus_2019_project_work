@@ -16,6 +16,7 @@ import ru.deft.telegrambot.service.AnonymousService;
 @Slf4j
 @Component("MyNameCommand")
 public class MyNameCommand extends AnonymizerCommand {
+    public static final String LOG_MY_NAME_COMMAND = "MyNameCommand with user: id = %s name = %s, commandIdentifier: %s";
 
     private final AnonymousService mAnonymouses;
 
@@ -28,7 +29,7 @@ public class MyNameCommand extends AnonymizerCommand {
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] strings) {
 
-//        log.info(LogTemplate.COMMAND_PROCESSING.getTemplate(), user.getId(), getCommandIdentifier());
+        log.debug(String.format(LOG_MY_NAME_COMMAND, user.getId(), user.getUserName(), getCommandIdentifier()));
 
         StringBuilder sb = new StringBuilder();
 
@@ -38,12 +39,12 @@ public class MyNameCommand extends AnonymizerCommand {
         if (!mAnonymouses.hasAnonymous(user)) {
 
             sb.append("You are not in bot users' list! Send /start command!");
-//            log.log(Level.getLevel(LogLevel.STRANGE.getValue()), "User {} is trying to execute '{}' without starting the bot.", user.getId(), getCommandIdentifier());
+            log.warn(String.format("User %s is trying to execute '%s' without starting the bot.", user.getId(), getCommandIdentifier()));
 
         } else if (mAnonymouses.getDisplayedName(user) == null) {
 
             sb.append("Currently you don't have a name.\nSet it using command:\n'/set_name &lt;displayed_name&gt;'");
-//            log.log(Level.getLevel(LogLevel.STRANGE.getValue()), "User {} is trying to execute '{}' without having a name.", user.getId(), getCommandIdentifier());
+            log.warn(String.format("User %s is trying to execute '%s' without having a name.", user.getId(), getCommandIdentifier()));
 
         } else {
 
