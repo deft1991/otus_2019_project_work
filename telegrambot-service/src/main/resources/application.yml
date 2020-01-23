@@ -1,0 +1,36 @@
+spring:
+  profiles:
+    active: dev
+  thymeleaf:
+    cache: false
+  datasource:
+    url: jdbc:h2:mem:telegramBd
+    driverClassName: org.h2.Driver
+    username: sa
+    password: sa
+  jpa:
+    hibernate:
+      ddl-auto: none
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        show_sql: true
+        use_sql_comments: true
+        format_sql: true
+        jdbc:
+          lob:
+            non_contextual_creation: true
+  h2:
+    console:
+      enabled: true
+telegram:
+  proxy:
+    host: 185.234.217.6
+    port: 3128
+feign:
+  client:
+    config:
+      auth:
+        url: http://localhost:8081/auth
+      news:
+        url: http://localhost:8082/ui

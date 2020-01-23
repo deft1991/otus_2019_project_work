@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>News List</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+</head>
+<style>
+    .col {
+        background: #f0f0f0; /* Цвет фона */
+        width: 230px; /* Ширина блока */
+        padding: 10px; /* Поля */
+        font-size: 1.5em; /* Размер шрифта */
+        word-wrap: break-word; /* Перенос слов */
+    }
+</style>
+<body>
+<h1>News List</h1>
+<a href="/ui/news/addNews">Add news</a>
+<!--<a href="@{/news/addNews}">Add news</a>-->
+<br/><br/>
+<div>
+    <table border="1">
+        <tr>
+            <th>User</th>
+            <th>News Text</th>
+            <th>Like</th>
+            <th>Dislike</th>
+            <th>Approved</th>
+            <th>Published</th>
+        </tr>
+        <tr th:each="news : ${newsList}">
+            <td class="col" th:utext="${news.userName}">...</td>
+            <td class="col" th:utext="${news.newsText}">...</td>
+            <td class="col" align="middle" th:utext="${news.likeCount}">...</td>
+            <td class="col" th:utext="${news.disLike}">...</td>
+            <td class="col" align="middle">
+                <input
+                        type="checkbox"
+                        name="approved"
+                        th:checked="${news.approved}"
+                        disabled="disabled"
+                        checked="checked"/>
+            </td>
+            <td class="col" align="middle">
+                <input
+                        type="checkbox"
+                        name="published"
+                        th:checked="${news.published}"
+                        disabled="disabled"
+                        checked="checked"/>
+            </td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>
