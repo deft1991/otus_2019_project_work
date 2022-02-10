@@ -16,7 +16,7 @@
 
     <properties>
         <java.version>12</java.version>
-        <hibernate-version>5.0.1.Final</hibernate-version>
+        <hibernate-version>5.4.24.Final</hibernate-version>
         <feign-okhttp.version>10.7.0</feign-okhttp.version>
     </properties>
 
